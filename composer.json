@@ -10,7 +10,7 @@
   "require": {
     "laravel/framework": "^5.0",
     "php": ">=7.0.0",
-    "talonon/ooops": "dev-master"
+    "talonon/ooops": "dev-master@dev"
   },
   "repositories": [
     {
