@@ -1,0 +1,27 @@
+{
+  "name": "talonon/lazyloader",
+  "description": "LazyLoader for Ooops",
+  "authors": [
+    {
+      "name": "Andy Muth",
+      "email": "andy@griffonco.com"
+    }
+  ],
+  "require": {
+    "laravel/framework": "^5.0",
+    "php": ">=7.0.0",
+    "talonon/ooops": "dev-master"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:Talonon/ooops.git"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Talonon\\LazyLoader\\": "src/"
+    }
+  },
+  "minimum-stability": "dev"
+}
