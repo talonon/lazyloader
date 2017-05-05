@@ -1,5 +1,7 @@
 <?php namespace Talonon\LazyLoader;
 
+use Talonon\Ooops\Interfaces\ResultInterface;
+
 trait LoadsLazily {
 
   /**
@@ -9,7 +11,7 @@ trait LoadsLazily {
   protected function ll(LazyLoadInterface $property = null) {
     if ($property === null || $property instanceof NullLazyLoader) {
       return new NullLazyLoader();
-    } else if ($property instanceof LazyLoader) {
+    } else if ($property instanceof ResultInterface) {
       return $property->GetResult();
     } else {
       return $property;
