@@ -8,11 +8,11 @@ trait LoadsLazily {
    * @param LazyLoadInterface|null $property
    * @return LazyLoadInterface
    */
-  protected function ll(LazyLoadInterface $property = null) {
+  protected function ll(LazyLoadInterface &$property = null) {
     if ($property === null || $property instanceof NullLazyLoader) {
       return new NullLazyLoader();
     } else if ($property instanceof ResultInterface) {
-      return $property->GetResult();
+      return $property = $property->GetResult();
     } else {
       return $property;
     }
