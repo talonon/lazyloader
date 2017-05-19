@@ -1,22 +1,18 @@
 <?php namespace Talonon\LazyLoader;
 
-use Talonon\Ooops\Interfaces\ResultInterface;
-
 trait LoadsLazily {
+
+  public function __construct() {
+    $this->_lazy = app(LazyLoaderService::class);
+   }
+
+  private $_lazy;
 
   /**
    * @param LazyLoadInterface|null $property
    * @return LazyLoadInterface
    */
   protected function ll(LazyLoadInterface &$property = null) {
-    if ($property === null || $property instanceof NullLazyLoader) {
-      return new NullLazyLoader();
-    } else if ($property instanceof ResultInterface) {
-      return $property = $property->GetResult();
-    } else {
-      return $property;
-    }
+    return $this->_lazy->Load($property);
   }
-
 }
-
