@@ -2,10 +2,6 @@
 
 trait LoadsLazily {
 
-  public function __construct() {
-    $this->_lazy = app(LazyLoaderService::class);
-   }
-
   private $_lazy;
 
   /**
@@ -13,6 +9,13 @@ trait LoadsLazily {
    * @return LazyLoadInterface
    */
   protected function ll(LazyLoadInterface &$property = null) {
-    return $this->_lazy->Load($property);
+    return $this->_getLazy()->Load($property);
+  }
+
+  private function _getLazy() {
+    if (!$this->_lazy) {
+      $this->_lazy = app(LazyLoaderService::class);
+    }
+    return $this->_lazy;
   }
 }
