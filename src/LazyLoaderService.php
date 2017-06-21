@@ -18,6 +18,7 @@ class LazyLoaderService implements \Serializable {
   }
 
   public function unserialize($serialized) {
+    $this->_abstracts = new Collection();
   }
 
   /**
