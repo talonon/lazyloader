@@ -2,16 +2,23 @@
 
 use Illuminate\Database\Eloquent\Collection;
 
-class LazyLoaderService {
+class LazyLoaderService implements \Serializable {
 
   public function __construct() {
     $this->_abstracts = new Collection();
   }
-
   /**
    * @var Collection
    */
   private $_abstracts;
+
+  public function serialize() {
+    return [];
+  }
+
+  public function unserialize($serialized) {
+    // noop
+  }
 
   /**
    * @param LazyLoadInterface|null $property
