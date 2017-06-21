@@ -7,17 +7,17 @@ class LazyLoaderService implements \Serializable {
   public function __construct() {
     $this->_abstracts = new Collection();
   }
+
   /**
    * @var Collection
    */
   private $_abstracts;
 
   public function serialize() {
-    return [];
+    return null;
   }
 
   public function unserialize($serialized) {
-    // noop
   }
 
   /**
