@@ -14,7 +14,7 @@ class LazyLoaderService implements \Serializable {
   private $_abstracts;
 
   public function serialize() {
-    return null;
+    return serialize(new LazyLoaderService());
   }
 
   public function unserialize($serialized) {
