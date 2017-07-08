@@ -2,24 +2,15 @@
 
 use Illuminate\Database\Eloquent\Collection;
 
-class LazyLoaderService implements \Serializable {
+class LazyLoaderService {
 
   public function __construct() {
-    $this->_abstracts = new Collection();
   }
 
   /**
    * @var Collection
    */
   private $_abstracts;
-
-  public function serialize() {
-    return serialize(new Collection());
-  }
-
-  public function unserialize($serialized) {
-    $this->_abstracts = new Collection();
-  }
 
   /**
    * @param LazyLoadInterface|null $property
@@ -34,15 +25,17 @@ class LazyLoaderService implements \Serializable {
   }
 
   public function Register($abstract, Callable $concrete) {
-    $this->_abstracts[$abstract] = $concrete;
+    app('lazyloader.abstracts')->put($abstract, $concrete);
   }
 
   private function _getConcrete(LazyLoadInterface &$property) {
+    /** @var Collection $abstracts */
+    $abstracts = app('lazyloader.abstracts');
     $registered = false;
-    if (($result = $this->_abstracts[get_class($property)] ?? null)) {
+    if (($result = $abstracts[get_class($property)] ?? null)) {
       $registered = true;
     } else {
-      $result = $this->_abstracts->first(
+      $result = $abstracts->first(
         function ($concrete, $abstract) use (&$property) {
           return ($property instanceof $abstract);
         }

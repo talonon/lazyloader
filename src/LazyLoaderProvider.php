@@ -1,5 +1,6 @@
 <?php namespace Talonon\LazyLoader;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 
 class LazyLoaderProvider extends ServiceProvider {
@@ -8,6 +9,10 @@ class LazyLoaderProvider extends ServiceProvider {
     $this->app->singleton(
       LazyLoaderService::class, function () {
       return new LazyLoaderService();
+    });
+    $this->app->singleton(
+      'lazyloader.abstracts', function () {
+      return (new Collection());
     });
   }
 
@@ -21,6 +26,7 @@ class LazyLoaderProvider extends ServiceProvider {
       NullLazyLoader::class, function () {
       return null;
     });
+
   }
 
   public function provides() {
